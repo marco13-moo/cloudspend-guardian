@@ -1,0 +1,6 @@
+.git
+.github
+graphify-out
+coverage.out
+dist
+tmp

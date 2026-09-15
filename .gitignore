@@ -1,0 +1,11 @@
+.DS_Store
+.env
+.idea/
+.vscode/
+bin/
+coverage.out
+dist/
+tmp/
+
+# Graphify is a local architectural-analysis artifact.
+graphify-out/
