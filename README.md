@@ -76,7 +76,7 @@ docker compose up --build
 5. Generate a reviewable Terraform remediation patch.
 6. Record projected and realized savings without double counting.
 
-The complete decision sequence is maintained in [the ADR index](docs/adr/README.md).
+The complete 39-decision sequence is maintained in [the ADR index](docs/adr/README.md). AI-assisted implementation begins with the [AI architecture execution guide](docs/adr/AI-GUIDE.md), which defines authority, phase gates, evidence requirements, and non-negotiable prohibitions.
 
 ## Security posture
 

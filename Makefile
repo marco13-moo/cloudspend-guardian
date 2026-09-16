@@ -2,7 +2,9 @@
 
 # Keep local and CI builds reproducible in restricted development environments.
 GOCACHE ?= /tmp/cloudspend-guardian-go-cache
+GOMODCACHE ?= /tmp/cloudspend-guardian-go-mod-cache
 export GOCACHE
+export GOMODCACHE
 
 build:
 	go build ./...

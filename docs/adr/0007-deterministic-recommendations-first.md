@@ -20,6 +20,12 @@ Begin with deterministic, versioned recommendation rules. Each rule exposes its 
 
 Behaviour is explainable and testable, although sophisticated workload patterns may initially evade detection.
 
+## Guardrails
+
+- Every rule and threshold is versioned.
+- Every actionable output exposes evidence, assumptions, exclusions, confidence, and rollback metadata.
+- Insufficient evidence produces abstention rather than fabricated certainty.
+
 ## Validation
 
 - Golden fixtures demonstrate true-positive, false-positive, insufficient-evidence, and reliability-veto scenarios.

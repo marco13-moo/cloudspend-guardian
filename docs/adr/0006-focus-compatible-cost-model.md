@@ -20,6 +20,12 @@ Store immutable provider records and map them into a versioned model compatible 
 
 Analytics and policy can operate against a consistent model. Mapping complexity and specification-version migrations become explicit operational obligations.
 
+## Guardrails
+
+- Raw provider records remain immutable and retain provenance.
+- Unknown or lossy mappings fail visibly rather than silently coercing values.
+- Monetary reconciliation is mandatory before an import becomes authoritative.
+
 ## Validation
 
 - Synthetic fixtures reconcile raw and normalized totals within a documented tolerance.
