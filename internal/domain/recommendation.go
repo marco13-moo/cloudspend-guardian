@@ -8,27 +8,31 @@ import (
 
 // Recommendation describes a proposed optimization; it is evidence, not authority to mutate infrastructure.
 type Recommendation struct {
-	ID                      string
-	ResourceID              string
-	Summary                 string
-	Evidence                []Evidence
-	Confidence              float64
-	ProjectedMonthlySavings Money
-	RollbackPlan            string
-	CreatedAt               time.Time
+	ID                      string             `json:"id"`
+	ResourceID              string             `json:"resourceId"`
+	Summary                 string             `json:"summary"`
+	RuleVersion             string             `json:"ruleVersion"`
+	Evidence                []Evidence         `json:"evidence"`
+	Assumptions             []string           `json:"assumptions"`
+	Exclusions              []string           `json:"exclusions"`
+	Confidence              float64            `json:"confidence"`
+	ConfidenceFactors       map[string]float64 `json:"confidenceFactors"`
+	ProjectedMonthlySavings Money              `json:"projectedMonthlySavings"`
+	RollbackPlan            string             `json:"rollbackPlan"`
+	CreatedAt               time.Time          `json:"createdAt"`
 }
 
 // Evidence records one observable fact supporting a recommendation.
 type Evidence struct {
-	Source      string
-	Description string
-	ObservedAt  time.Time
+	Source      string    `json:"source"`
+	Description string    `json:"description"`
+	ObservedAt  time.Time `json:"observedAt"`
 }
 
 // Money uses integer minor units to avoid floating-point accounting errors.
 type Money struct {
-	Currency   string
-	MinorUnits int64
+	Currency   string `json:"currency"`
+	MinorUnits int64  `json:"minorUnits"`
 }
 
 // Validate enforces the minimum explainability contract for every recommendation.
@@ -38,6 +42,15 @@ func (r Recommendation) Validate() error {
 	}
 	if len(r.Evidence) == 0 {
 		return errors.New("at least one evidence item is required")
+	}
+	if r.RuleVersion == "" {
+		return errors.New("rule version is required")
+	}
+	if len(r.Assumptions) == 0 {
+		return errors.New("at least one assumption is required")
+	}
+	if len(r.ConfidenceFactors) == 0 {
+		return errors.New("confidence factors are required")
 	}
 	if r.Confidence < 0 || r.Confidence > 1 {
 		return errors.New("confidence must be between zero and one")

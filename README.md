@@ -56,6 +56,7 @@ Prerequisites: Go 1.27+ and Docker.
 
 ```bash
 make verify
+make demo
 make run
 curl http://localhost:8080/healthz
 curl http://localhost:8080/readyz
@@ -77,6 +78,22 @@ docker compose up --build
 6. Record projected and realized savings without double counting.
 
 The complete 39-decision sequence is maintained in [the ADR index](docs/adr/README.md). AI-assisted implementation begins with the [AI architecture execution guide](docs/adr/AI-GUIDE.md), which defines authority, phase gates, evidence requirements, and non-negotiable prohibitions.
+
+## Implemented vertical slices
+
+### Slice 001: synthetic cost recommendation
+
+`make demo` executes an offline, deterministic workflow:
+
+1. Generate explicitly synthetic AWS-like billing and utilization records.
+2. Import a documented FOCUS-compatible subset.
+3. Hash the raw artifact and derive deterministic canonical record identities.
+4. Reject duplicates, lossy currency precision, malformed telemetry, and unreconciled input.
+5. Reconcile all imported monetary values in integer minor units.
+6. Evaluate the versioned `idle-compute/v1` rule.
+7. Emit either an evidence-backed recommendation or an explicit abstention.
+
+The output is machine-readable JSON and labels all data as synthetic. This slice does not mutate cloud infrastructure, claim realized savings, or promote any proposed ADR to Accepted. Its current evidence is documented in [Slice 001 evidence](docs/evidence/vertical-slice-001.md).
 
 ## Security posture
 

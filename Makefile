@@ -1,4 +1,4 @@
-.PHONY: build run test lint fmt-check verify
+.PHONY: build demo run test lint fmt-check verify
 
 # Keep local and CI builds reproducible in restricted development environments.
 GOCACHE ?= /tmp/cloudspend-guardian-go-cache
@@ -11,6 +11,9 @@ build:
 
 run:
 	go run ./cmd/server
+
+demo:
+	@go run ./cmd/demo
 
 test:
 	go test -race -cover ./...
